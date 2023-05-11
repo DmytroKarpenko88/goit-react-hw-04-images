@@ -1,4 +1,4 @@
-import { Component, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -8,12 +8,6 @@ import { IoCloseCircleSharp } from 'react-icons/io5';
 const modalRoot = document.querySelector('#modal-root');
 
 const Modal = ({ modalData, onClose }) => {
-  const handeKeyDowne = e => {
-    if (e.code === 'Escape') {
-      onClose();
-    }
-  };
-
   const handleBackDrop = e => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -21,15 +15,19 @@ const Modal = ({ modalData, onClose }) => {
   };
 
   useEffect(() => {
-    const handeKeyDowne = e => console.log('keydown event: ', e);
+    const handeKeyDowne = e => {
+      if (e.code === 'Escape') {
+        onClose();
+      }
+    };
     window.addEventListener('keydown', handeKeyDowne);
 
     return () => {
       window.removeEventListener('keydown', handeKeyDowne);
     };
-  }, []);
+  }, [onClose]);
 
-  const { largeImageUrl, altName } = this.props.modalData;
+  const { largeImageUrl, altName } = modalData;
   return createPortal(
     <div className={css.Overlay} onClick={handleBackDrop}>
       <div className={css.Modal}>
