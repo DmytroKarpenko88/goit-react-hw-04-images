@@ -9,7 +9,7 @@ const modalRoot = document.querySelector('#modal-root');
 
 const Modal = ({ modalData, onClose }) => {
   const handleBackDrop = e => {
-    if (e.target === e.currentTarget) {
+    if (e.target !== e.currentTarget) {
       onClose();
     }
   };

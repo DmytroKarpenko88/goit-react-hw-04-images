@@ -13,9 +13,8 @@ const ImageGalleryItem = ({ url, tags, largeImageURL }) => {
   const [isModalShow, setIsModalShow] = useState(false);
 
   const handleModalToggle = () => {
-    setIsModalShow(prev => {
-      console.log(prev);
-      return !prev;
+    setIsModalShow(state => {
+      return !state;
     });
   };
 
