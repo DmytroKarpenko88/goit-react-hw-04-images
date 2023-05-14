@@ -1,18 +1,30 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import Modal from 'components/Modal/Modal';
 import css from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ url, tags, largeImageURL, openModalWindow }) => {
+const ImageGalleryItem = ({ url, tags, largeImageURL }) => {
   const newModalData = {
     largeImageUrl: largeImageURL,
     altName: tags,
   };
 
+  const [isModalShow, setIsModalShow] = useState(false);
+
   return (
-    <li
-      className={css.ImageGalleryItem}
-      onClick={() => openModalWindow(newModalData)}
-    >
+    <li className={css.ImageGalleryItem} onClick={() => setIsModalShow(true)}>
       <img src={url} alt={tags} className={css.ImageGalleryItemImage} />
+      <>
+        {/* ---------Modal window------------- */}
+
+        {isModalShow && (
+          <Modal
+            modalData={newModalData}
+            onClose={() => setIsModalShow(false)}
+          />
+        )}
+      </>
     </li>
   );
 };

@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FcSearch } from 'react-icons/fc';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import css from './Searchbar.module.css';
-import { useState } from 'react';
 
 const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');

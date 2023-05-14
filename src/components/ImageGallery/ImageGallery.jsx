@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 
 import css from './ImageGallery.module.css';
 
-const ImageGallery = ({ photos, openModalWindow }) => {
+const ImageGallery = ({ photos }) => {
   return (
     <ul className={css.ImageGallery}>
       {/* <!-- Набір <li> із зображеннями --> */}
-      {photos.map(({ webformatURL, tags, largeImageURL, id }) => {
+      {photos.map(({ webformatURL, tags, largeImageURL }, index) => {
         return (
           <ImageGalleryItem
-            key={id}
+            key={index}
             url={webformatURL}
             largeImageURL={largeImageURL}
             tags={tags}
-            openModalWindow={openModalWindow}
           />
         );
       })}
@@ -23,7 +22,6 @@ const ImageGallery = ({ photos, openModalWindow }) => {
 };
 
 ImageGallery.protoTypes = {
-  openModalWindow: PropTypes.func.isRequired,
   photos: PropTypes.array.isRequired,
 };
 
