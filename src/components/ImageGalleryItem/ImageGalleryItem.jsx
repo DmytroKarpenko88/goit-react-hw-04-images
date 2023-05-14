@@ -12,17 +12,21 @@ const ImageGalleryItem = ({ url, tags, largeImageURL }) => {
 
   const [isModalShow, setIsModalShow] = useState(false);
 
+  const handleModalToggle = () => {
+    setIsModalShow(prev => {
+      console.log(prev);
+      return !prev;
+    });
+  };
+
   return (
-    <li className={css.ImageGalleryItem} onClick={() => setIsModalShow(true)}>
+    <li className={css.ImageGalleryItem} onClick={handleModalToggle}>
       <img src={url} alt={tags} className={css.ImageGalleryItemImage} />
       <>
         {/* ---------Modal window------------- */}
 
         {isModalShow && (
-          <Modal
-            modalData={newModalData}
-            onClose={() => setIsModalShow(false)}
-          />
+          <Modal modalData={newModalData} onClose={handleModalToggle} />
         )}
       </>
     </li>
@@ -33,7 +37,6 @@ ImageGalleryItem.protoType = {
   url: PropTypes.string.isRequired,
   tags: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
-  openModalWindow: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;

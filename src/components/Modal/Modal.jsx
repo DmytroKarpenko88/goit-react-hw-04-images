@@ -33,7 +33,11 @@ const Modal = ({ modalData, onClose }) => {
       <div className={css.Modal}>
         <img src={largeImageUrl} alt={altName} />
 
-        <button type="button" onClick={onClose} className={css.CloseBtn}>
+        <button
+          type="button"
+          onClick={() => onClose()}
+          className={css.CloseBtn}
+        >
           <IoCloseCircleSharp size={32} />
         </button>
       </div>
