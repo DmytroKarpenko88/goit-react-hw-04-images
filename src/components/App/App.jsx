@@ -44,10 +44,8 @@ const App = () => {
           Notify.failure('No images were found for your request');
           return;
         }
+        setTotalItems(res.total);
 
-        if (totalItems !== res.total) {
-          Notify.success(`We found ${res.total} images`);
-        }
         const response = res.hits.map(
           ({ webformatURL, tags, largeImageURL }) => {
             return {
@@ -63,7 +61,14 @@ const App = () => {
       })
       .catch(error => Notify.failure(error.message))
       .finally(() => setLoading(false));
-  }, [page, query, totalItems]);
+  }, [page, query]);
+
+  useEffect(() => {
+    if (!totalItems) {
+      return;
+    }
+    Notify.success(`We found ${totalItems} images`);
+  }, [totalItems]);
 
   return (
     <div className={css.App}>
