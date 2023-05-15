@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import css from './App.module.css';
@@ -14,7 +14,7 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
 
   const onSubmit = newQuery => {
     if (query !== newQuery) {
@@ -29,10 +29,10 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
 
     if (!query) {
       return;
@@ -43,6 +43,10 @@ const App = () => {
         if (res.hits.length === 0) {
           Notify.failure('No images were found for your request');
           return;
+        }
+
+        if (page === 1) {
+          Notify.success(`We found ${res.total} images`);
         }
         setTotalItems(res.total);
 
@@ -63,12 +67,12 @@ const App = () => {
       .finally(() => setLoading(false));
   }, [page, query]);
 
-  useEffect(() => {
-    if (!totalItems) {
-      return;
-    }
-    Notify.success(`We found ${totalItems} images`);
-  }, [totalItems]);
+  // useEffect(() => {
+  //   if (!totalItems) {
+  //     return;
+  //   }
+  //   Notify.success(`We found ${totalItems} images`);
+  // }, [totalItems]);
 
   return (
     <div className={css.App}>
