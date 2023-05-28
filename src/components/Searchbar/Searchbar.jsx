@@ -7,6 +7,7 @@ import css from './Searchbar.module.css';
 
 const Searchbar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
+
   const handleSubmit = e => {
     e.preventDefault();
     if (!query) {
